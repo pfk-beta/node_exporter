@@ -38,7 +38,7 @@ type androidCollector struct {
 }
 
 func init() {
-	registerCollector("android", false, NewAndroidCollector)
+	registerCollector("android", true, NewAndroidCollector)
 }
 
 // NewAndroidCollector returns a new Collector exposing dumpsys and getprop values.
@@ -48,7 +48,7 @@ func NewAndroidCollector(logger log.Logger) (Collector, error) {
 
 	batteryChargingDesc := prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, subsystem, "battery_charging"),
-		"Charging androidLabelNames.",
+		"Charging state.",
 		androidLabelNames, nil,
 	)
 
@@ -60,7 +60,7 @@ func NewAndroidCollector(logger log.Logger) (Collector, error) {
 
 	batteryTempDesc := prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, subsystem, "battery_temperature"),
-		"Temperature of charged battery.",
+		"Temperature of battery.",
 		androidLabelNames, nil,
 	)
 
